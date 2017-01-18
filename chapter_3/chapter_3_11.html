@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset = "utf-8">
+        <title>Wave 1</title>
+        <link rel = "stylesheet" href = "style.css">
+    </head>
+    <body>
+        <canvas id = "canvas" width = "400" height = "400"></canvas>
+        <script src = utils.js></script>
+        <script src = ball.js></script>
+        <script>
+            window.onload = function() {
+                var canvas = document.getElementById('canvas'),
+                    context = canvas.getContext('2d'),
+                    ball = new Ball(),
+                    angle_ = Math.PI/10,
+                    angle = 0
+                    centerY = 200,
+                    range = 100,
+                    speed = 0.05,
+                    radius = 10;
+                (function drawFrame(){
+                    window.requestAnimationFrame(drawFrame,canvas);
+                    context.clearRect(0,0,canvas.width,canvas.height);
+
+                    for (var i = 0;i <20;i++){
+                        ball.x = radius+ i*(2*radius)
+                        ball.y = centerY+Math.sin(i*angle_+angle)*range
+                        ball.radius = radius
+                        ball.draw(context)
+                    }
+                    angle = speed + angle
+            }())
+
+            };
+        </script>
+    </body>
+</html>
