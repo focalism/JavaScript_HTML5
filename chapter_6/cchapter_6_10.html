@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset  = "utf-8">
+        <title>task 1</title>
+        <link rel = "stylesheet" href = "../css_file/style.css">
+    </head>
+    <body>
+        <canvas id = "canvas" width = "800" height = "600"></script>
+        <script src = "../utils/utils.js"></script>
+        <script src = "../js_file/line.js"></script>
+        <script src = "../js_file/ball.js"></script>
+        <script>
+            window.onload = function(){
+                var canvas = document.getElementById('canvas')
+                    context = canvas.getContext('2d'),
+                    mouse = utils.captureMouse(canvas),
+                    interval = 40,
+                    lines = [],
+                    lines2 = [],
+                    balls = [],
+                    vx = 0,
+                    vy = 0,
+                    x = 0,
+                    y =0,
+                    isMouseDown = false;
+
+
+            //creat ball set
+            for (var i  = 0;i<10;i++){
+                ball = new Ball();
+                ball.x = Math.random()*canvas.width;
+                ball.y = Math.random()*canvas.height;
+                ball.radius = Math.random()*50;
+                balls.push(ball)
+            }
+
+                canvas.addEventListener('mousedown',function(){
+                    oldX = mouse.x;
+                    oldY = mouse.y;
+                    isMouseDown = true;
+                    canvas.addEventListener('mouseup',onMouseUp,false);
+                    canvas.addEventListener('mousemove',onMouseMove,false);
+                },false)
+
+                function onMouseUp(){
+                    isMouseDown = false;
+                    canvas.removeEventListener('mouseup',onMouseUp,false);
+                    canvas.removeEventListener('mousemove',onMouseMove,false);
+                }
+
+                function onMouseMove(){
+                    vx = (mouse.x - oldX);
+                    vy = (mouse.y - oldY);
+                    oldX = mouse.x;
+                    oldY = mouse.y;
+                    x = x + vx
+                    y = y + vy
+                    for (var i = 0;i < 10;i++){
+                        balls[i].x += vx;
+                        balls[i].y += vy;
+                    }
+                }
+
+                (function drawFrame(){
+                    window.requestAnimationFrame(drawFrame,canvas);
+                    context.clearRect(0,0,canvas.width,canvas.height)
+
+                    dx = x%interval
+                    dy = y%interval
+                    context.beginPath();
+                    for (var i = 0;dx+i*interval<canvas.width;i++){
+                        context.moveTo(dx+i*interval,0)
+                        context.lineTo(dx+i*interval,canvas.height)
+                        context.moveTo(0,dy+i*interval)
+                        context.lineTo(canvas.width,dy+i*interval)
+
+                    }
+                    context.stroke()
+                    context.closePath()
+
+                    for (var i = 0;i < 10;i++){
+                        balls[i].draw(context)
+                    }
+                }())
+
+        }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset  = "utf-8">
+        <title>task 1</title>
+        <link rel = "stylesheet" href = "../css_file/style.css">
+    </head>
+    <body>
+        <canvas id = "canvas" width = "800" height = "600"></script>
+        <script src = "../utils/utils.js"></script>
+        <script src = "../js_file/line.js"></script>
+        <script src = "../js_file/ball.js"></script>
+        <script>
+            window.onload = function(){
+                var canvas = document.getElementById('canvas')
+                    context = canvas.getContext('2d'),
+                    mouse = utils.captureMouse(canvas),
+                    interval = 40,
+                    lines1 = [],
+                    lines2 = [],
+                    balls = [],
+                    isMouseDown = false;
+
+            //creat ball set
+            for (var i  = 0;i<10;i++){
+                ball = new Ball();
+                ball.x = Math.random()*canvas.width;
+                ball.y = Math.random()*canvas.height;
+                ball.radius = Math.random()*50;
+                balls.push(ball)
+            }
+                    
+            //creat lines set
+            for (var i = -100;i<100;i++){
+                line1 = new Line;
+                line1.startx = (i+1)*interval;
+                line1.starty = 0;
+                line1.endx = (i+1)*interval;
+                line1.endy = canvas.height;
+                
+                line2 = new Line;
+                line2.startx = 0;
+                line2.starty = (i+1)*interval;
+                line2.endx = canvas.width;
+                line2.endy = (i+1)*interval;
+                lines1.push(line1)
+                lines2.push(line2)
+            }
+
+                canvas.addEventListener('mousedown',function(){
+                    oldX = mouse.x;
+                    oldY = mouse.y;
+                    isMouseDown = true;
+                    canvas.addEventListener('mouseup',onMouseUp,false);
+                    canvas.addEventListener('mousemove',onMouseMove,false);
+                },false)
+
+                function onMouseUp(){
+                    isMouseDown = false;
+                    canvas.removeEventListener('mouseup',onMouseUp,false);
+                    canvas.removeEventListener('mousemove',onMouseMove,false);
+                }
+
+                function onMouseMove(){
+                    vx = (mouse.x - oldX);
+                    vy = (mouse.y - oldY);
+                    oldX = mouse.x;
+                    oldY = mouse.y;
+                    for (var i = 0;i < 10;i++){
+                        balls[i].x += vx;
+                        balls[i].y += vy;
+                    }
+                    for (var i = 0;i< lines1.length;i++){
+                        lines1[i].startx += vx;
+                        lines1[i].endx += vx;
+                        lines2[i].starty += vy;
+                        lines2[i].endy += vy;
+                }
+                }
+
+                (function drawFrame(){
+                    window.requestAnimationFrame(drawFrame,canvas);
+                    context.clearRect(0,0,canvas.width,canvas.height)
+                    for (var i = 0;i< lines1.length;i++){
+                        lines1[i].draw(context)
+                        lines2[i].draw(context)
+                    }
+
+                    for (var i = 0;i < 10;i++){
+                        balls[i].draw(context)
+                    }
+                }())
+
+        }
+        </script>
+    </body>
+</html>
