@@ -6,11 +6,59 @@
         <link rel = "stylesheet" href = "../css_file/style.css">
     </head>
     <body>
-        <canvas id = "canvas" width = "400" height = "400"></canvas>
+        <canvas id = "canvas" width = "600" height = "600"></canvas>
         <script>
+            window.onload = function(){
             var canvas = document.getElementById('canvas')
                 context = canvas.getContext('2d')
-                
+                points = []
+                numpoints = 5
+                controlpoint = {}
+                controlpoint1 = {}
+                xspeed = 0.01
+                yspeed = 0.03
+                rot_anglex = Math.random()
+                rot_angley = Math.random()
+                move_y_angle = Math.random()*100
+                range = 200
+                centerx = 0
+                centery = 0
+
+            for (var i = 0; i < numpoints ;i++){
+                points.push({
+                    x:Math.random()*60+i*60,
+                    y:canvas.height/2+Math.pow(-1,i)*80
+                })                
+            }  
+            (function drawFrame(){
+
+                window.requestAnimationFrame(drawFrame,canvas);
+                //context.clearRect(0,0,canvas.width,canvas.height);
+            centerx += 3*Math.sin(rot_anglex+Math.PI/2)
+            centery += -3*Math.cos(rot_angley)
+            for ( i = 0;i<numpoints;i++){
+                points[i].y = canvas.height/2+Math.pow(-1,i)*80 +Math.sin(move_y_angle+i*Math.PI/2)*100
+            }
+            context.save();
+            context.translate(centerx,centery)
+            context.beginPath();
+            context.moveTo(points[0].x,points[0].y)
+            for ( i = 1;i<numpoints-2;i++){
+                controlpoint.x = (points[i].x+points[i+1].x)/2
+                controlpoint.y = (points[i].y+points[i+1].y)/2
+
+                context.quadraticCurveTo(points[i].x,points[i].y,controlpoint.x,controlpoint.y)
+            }
+            context.quadraticCurveTo(points[i].x,points[i].y,points[i+1].x,points[i+1].y)
+            move_y_angle += 0.03
+            rot_anglex += xspeed
+            rot_angley += yspeed
+            context.stroke();
+            context.restore()
+            }())
+        }
+
         </script>
     </body>
 </html>
+

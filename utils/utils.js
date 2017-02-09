@@ -23,7 +23,7 @@ utils.captureMouse = function (element) {
     return mouse
 }
 
-utils.capturTouch = function (element) {
+utils.captureTouch = function (element) {
     var touch = {x:null,y:null,isPressed:false};
 
     element.addEventListener('touchstart',function (event){
@@ -71,7 +71,7 @@ utils.parseColor = function(color,toNumber){
     }
     else{
         if (typeof color === 'number'){
-            color = '#'+('00000'+(color|0).toSting(16)).substr(-6);
+            color = '#'+('00000'+(color|0).toString(16)).substr(-6);
         }
         return color;
     }
