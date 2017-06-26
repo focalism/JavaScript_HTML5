@@ -10,23 +10,27 @@
         <canvas id = 'canvas' width = '800' height = '800'></canvas>
         <script src = '../utils/utils.js'></script>
         <script src = '../js_file/ball.js'></script>
+        <script src = '../js_file/arrow.js'></script>
         <script>
         window.onload = function(){
             var canvas = document.getElementById('canvas'),
                 context = canvas.getContext('2d'),
+                arrow = new Arrow(),
                 mouse = utils.captureMouse(canvas),
-                ball = new Ball(),
+                rotation = Math.PI/2,
                 easing = 0.05;
+
             (function drawFram(){
                 window.requestAnimationFrame(drawFram,canvas);
                 context.clearRect(0,0,canvas.width,canvas.height);
 
-                var vx = (mouse.x-ball.x)*easing,
-                    vy = (mouse.y-ball.y)*easing;
+                targetrotation = Math.atan(mouse.y/mouse.x);
 
-                ball.x += vx;
-                ball.y += vy;
-                ball.draw(context);
+                arrow.rotation += (targetrotation-rotation)*easing;
+                arrow.x = canvas.width/2;
+                arrow.y = canvas.height/2;
+
+                arrow.draw(context);
             }());
 
         };
