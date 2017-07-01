@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    <canvas id='canvas' width='800' height='800'></canvas>
+    <canvas id='canvas' width='600' height='600'></canvas>
     <script src='../utils/utils.js'></script>
     <script src='../js_file/line.js'></script>
     <script src='../js_file/ball.js'></script>
@@ -76,8 +76,17 @@
                     ball.x = canvas.width - ball.radius
                     ball.vx *= bounce
                 } else if (ball.x - ball.radius < 0) {
-
+                    ball.x = ball.radius;
+                    ball.vx *= bounce
                 }
+                if (ball.y + ball.radius > canvas.height){
+                    ball.y = canvas.height - ball.radius
+                    ball.vy *= bounce
+                }else if ( ball.y- ball.radius < 0){
+                    ball.y = ball.radius
+                    ball.vy *= bounce
+                }
+                
 
                 ball.draw(context);
                 line.draw(context);
