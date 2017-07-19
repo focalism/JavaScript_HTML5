@@ -34,7 +34,7 @@
                 return {
                     x: (reverse) ? (x * cos + y * sin) : (x * cos - y * sin),
                     y: (reverse) ? (y * cos - x * sin) : (y * cos + x * sin)
-                }
+                };
             }
 
             function checkCollision(ball0, ball1) {
@@ -71,7 +71,7 @@
 
                     ball1.x = ball0.x + pos1F.x;
                     ball1.y = ball0.y + pos1F.y;
-                    ball0.x = ball0.x + pos0.x;
+                    ball0.x = ball0.x + pos0F.x;
                     ball0.y = ball0.y + pos0F.y
 
 
@@ -121,7 +121,7 @@
                 ball0.draw(context);
                 ball1.draw(context);
             }());
-        }
+        };
     </script>
 </body>
 
