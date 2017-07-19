@@ -22,13 +22,13 @@
             ball0.x = canvas.width - 200;
             ball0.y = canvas.height - 200;
             ball0.vx = Math.random() * 10 - 5;
-            ball0.vy = Math.random * 10 - 5;
+            ball0.vy = Math.random() * 10 - 5;
 
             ball1.mass = 1;
             ball1.x = 100;
             ball1.y = 100;
             ball1.vx = Math.random() * 10 - 5;
-            ball1.vy = Math.random * 10 - 5;
+            ball1.vy = Math.random() * 10 - 5;
 
             function rotate(x, y, sin, cos, reverse) {
                 return {
@@ -58,7 +58,7 @@
 
                         vxTotal = vel0.x - vel1.x;
 
-                    vel0.x = ((ball0.mass - ball1.mass) * vel0.x + 2 * ball1.mass * ve1l.x) / (ball0.mass + ball1.mass)
+                    vel0.x = ((ball0.mass - ball1.mass) * vel0.x + 2 * ball1.mass * vel1.x) / (ball0.mass + ball1.mass)
 
                     vel1.x = vxTotal + vel0.x;
 
