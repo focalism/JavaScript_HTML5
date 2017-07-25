@@ -79,7 +79,7 @@ utils.colorToRGB = function(color, alpha) {
     if (typeof color === 'string' && color[0] === "#") {
         color = window.parseInt(color.slice(1), 16);
     }
-    alpha = (alpha == undefinde) ? 1 : alpha
+    alpha = (alpha == undefined) ? 1 : alpha
         //extract component values
     var r = color >> 16 & 0xff,
         g = color >> 8 & 0xff,
