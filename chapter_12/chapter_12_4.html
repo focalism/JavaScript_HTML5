@@ -1,49 +1,51 @@
 <!doctype html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <title>Particles</title>
-    <link rel = 'stylesheet' href = '../css_file/style.css'>
+    <link rel='stylesheet' href='../css_file/style.css'>
 </head>
+
 <body>
-    <canvas id = 'canvas' width = '800' height = '800'></canvas>
-    <script src = '../utils/utils.js'></script>
-    <script src = '../js_file/ball.js'></script>
+    <canvas id='canvas' width='800' height='800'></canvas>
+    <script src='../utils/utils.js'></script>
+    <script src='../js_file/ball.js'></script>
     <script>
-        window.onload = function(){
-            var canvas =document.getElementById('canvas'),
+        window.onload = function() {
+            var canvas = document.getElementById('canvas'),
                 context = canvas.getContext('2d'),
                 particles = [],
                 bounce = -1.0
-                numParticales = 2;
-                sun = new Ball(100,'#ffff00'),
-                plant = new Ball(1,'#00ff00');
-            sun.x = canvas.width/2;
-            sun.y = canvas.height/2;
+            numParticales = 2;
+            sun = new Ball(100, '#ffff00'),
+                plant = new Ball(1, '#00ff00');
+            sun.x = canvas.width / 2;
+            sun.y = canvas.height / 2;
             sun.mass = 10000;
             particles.push(sun);
-            plant.x = canvas.width/2+200;
-            plant.y = canvas.height/2;
+            plant.x = canvas.width / 2 + 200;
+            plant.y = canvas.height / 2;
             plant.vy = 3;
             plant.mass = 1;
             particles.push(plant);
 
-            function draw(particle){
+            function draw(particle) {
                 particle.draw(context);
             }
 
-            function gravitate(partA,partB){
+            function gravitate(partA, partB) {
                 var dx = partB.x - partA.x,
                     dy = partB.y - partA.y,
-                    distSQ = dx*dx + dy*dy,
+                    distSQ = dx * dx + dy * dy,
                     dist = Math.sqrt(distSQ),
-                    force = partA.mass*partB.mass/distSQ,
-                    ax = force*dx /dist,
-                    ay = force*dy /dist;
-                partA.vx += ax/partA.mass;
-                partA.vy += ay/partA.mass;
-                partB.vx -= ax/partB.mass;
-                partB.vy -= ay/partB.mass
+                    force = partA.mass * partB.mass / distSQ,
+                    ax = force * dx / dist,
+                    ay = force * dy / dist;
+                partA.vx += ax / partA.mass;
+                partA.vy += ay / partA.mass;
+                partB.vx -= ax / partB.mass;
+                partB.vy -= ay / partB.mass
             }
 
 
@@ -63,6 +65,7 @@
                     ball.vy *= bounce;
                 }
             }
+
             function rotate(x, y, sin, cos, reverse) {
                 return {
                     x: (reverse) ? (x * cos + y * sin) : (x * cos - y * sin),
@@ -119,24 +122,25 @@
                 }
             }
 
-            function move(partA,i){
+            function move(partA, i) {
                 partA.x += partA.vx;
                 partA.y += partA.vy;
                 checkWalls(partA)
 
-                for (var partB,j = i+1;j<numParticales;j++){
-                    partB =particles[j];
-                    checkCollision(partA,partB)
-                    gravitate(partA,partB)
+                for (var partB, j = i + 1; j < numParticales; j++) {
+                    partB = particles[j];
+                    checkCollision(partA, partB)
+                    gravitate(partA, partB)
                 }
             }
 
-            (function drawFrame(){
-                window.requestAnimationFrame(drawFrame,canvas);
+            (function drawFrame() {
+                window.requestAnimationFrame(drawFrame, canvas);
                 particles.forEach(move);
                 particles.forEach(draw);
             }());
         };
     </script>
 </body>
+
 </html>
