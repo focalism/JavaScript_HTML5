@@ -7,7 +7,7 @@
 
     </head>
     <body>
-        <canvas id = 'canvas' width = "400" height = "400"></canvas>
+        <canvas id = 'canvas' width = "800" height = "800"></canvas>
         <script src = "../utils/utils.js"></script>
         <script src = '../js_file/point3d.js'></script>
         <script>
@@ -20,13 +20,22 @@
                     vpx = canvas.width/2,
                     vpy = canvas.height/2,
                     angleX,angleY;
-                points[0] = new Point3d(-100,-100,100);
-                points[1] = new Point3d(100,-100,100);
-                points[2] = new Point3d(100,100,100);
-                points[3] = new Point3d(-100,100,100);
+                points[0] = new Point3d(-150,-250,100);
+                points[1] = new Point3d(150,-250,100);
+                points[2] = new Point3d(150,-150,100);
+                points[3] = new Point3d(-50,-150,100);
+                points[4] = new Point3d(-50,-50,100);
+                points[5] = new Point3d(50,-50,100);
+                points[6] = new Point3d(50,50,100);
+                points[7] = new Point3d(-50,50,100);
+                points[8] = new Point3d(-50,150,100);
+                points[9] = new Point3d(150,150,100);
+                points[10] = new Point3d(150,250,100);
+                points[11] = new Point3d(-150,250,100);
 
                 points.forEach(function (point){
                     point.setVanishingPoint(vpx,vpy)
+                    point.setCenter(0,0,200)
 
                 });
 
