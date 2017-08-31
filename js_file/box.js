@@ -1,31 +1,4 @@
-function Box(width,height,color){
-    if(width === undefined){width = 50;}
-    if(height === undefined){height = 50;}
-    if(color === undefined){color = "#ff0000"}
-    this.x = 0;
-    this.y = 0;
-    this.width = width;
-    this.height = height;
-    this.vx = 0;
-    this.vy = 0;
-    this.rotation = 0;
-    this.scaleX = 1;
-    this.scaleY = 1;
-    this.color = utils.parseColor(color);
-    this.lineWidth = 1;
-}
-
-Box.prototype.draw = function(context){
-    context.save();
-    context.translate(this.x,this.y);
-    context.rotate(this.rotation);
-    context.scale(this.scaleX,this.scaleY);
-    context.lineWidth = this.lineWidth;
-    context.fillStyle = this.color;
-    context.beginPath();
-    context.rect(0,0,this.width,this.height)
-    context.closePath
-    context.fill();
-    if(this.lineWidth>0){context.stroke()}
-    context.restore();
-}
+{"message":{},"sessionId":"23bfff8c-9f8b-4e4f-9a8e-2d21726353bc","success":"true","result":{"visitor":{"id":1,"name":"uyun","role":null}}}{"message":{},"sessionId":"567740c8-21dd-471c-8b6f-4c68a0f240e0","success":"true","page":{"result":
+[{"configId":307,"appName":"uyun","appId":1,"version":"2_0_0","envId":3,"envName":"local","type":"配置文件","typeId":0,"key":"alert.properties","value":"","createTime":"20170804135046","modifyTime":"201708041350","machineSize":0,"machineList":[],"errorNum":0},
+{"configId":309,"appName":"uyun","appId":1,"version":"2_0_0","envId":3,"envName":"local","type":"配置文件","typeId":0,"key":"ant.properties","value":"","createTime":"20170804150654","modifyTime":"201708071212","machineSize":0,"machineList":[],"errorNum":0},
+{"configId":173,"appName":"uyun","appId":1,"version":"2_0_0","envId":3,"envName":"local","type":"配置文件","typeId":0,"key":"automation.properties","value":"","createTime":"20170727140230","modifyTime":"201707271402","machineSize":0,"machineList":[],"errorNum":0},
